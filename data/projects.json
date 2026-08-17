@@ -1,0 +1,67 @@
+{
+  "hero": {
+    "name": "王泽瑜",
+    "role": "ROBOTICS · CONTROL · EMBODIED AI",
+    "about": "我专注于机器人系统与具身智能工程，持续打通工业多轴控制、机械臂规划执行、双臂操作与 VLA 训练评测的完整链路。",
+    "profileImage": "media/profile/wang-zeyu.jpg",
+    "githubHref": "https://github.com/l2ktech",
+    "githubLabel": "GitHub",
+    "viewProjectsLabel": "View Projects",
+    "linkedinHref": "",
+    "resumeHref": ""
+  },
+  "projectHeading": "项目",
+  "projectIntro": "五个项目都从当前文档和本地素材重写。首页先看视频，点进详情后仍留在这一页，继续看架构、过程图和结果。",
+  "projects": [
+    {
+      "number": "01",
+      "id": "top",
+      "kicker": "工业控制 · 双五轴",
+      "title": "TOP 双五轴镜像测厚",
+      "description": "超声回波经 C++/Qt、上位机和补偿进入双五轴控制，离线由 NX 运动学映射和仿真放行。",
+      "tags": ["C++ / Qt", "超声测厚"],
+      "video": "media/top/five-axis-control.mp4",
+      "poster": "media/top/13_dual_head_axis_layout.png"
+    },
+    {
+      "number": "02",
+      "id": "parol6",
+      "kicker": "运动规划 · 真机安全",
+      "title": "PAROL6 六轴机械臂",
+      "description": "ROS 2 / MoveIt 规划经碰撞审计和版本化 IPC，进入唯一 SocketCAN 执行核心，并回到安全终态。",
+      "tags": ["ROS 2", "MoveIt 2", "SocketCAN"],
+      "video": "media/parol6/isaac-orbit.mp4",
+      "poster": "media/parol6/grasp-lift.png"
+    },
+    {
+      "number": "03",
+      "id": "evo-rl",
+      "kicker": "双臂操作 · 强化学习",
+      "title": "Evo-RL 毛巾折叠",
+      "description": "SO-101 双臂毛巾折叠从 D0 基线走到 HIL 和 Value / ACP，候选微调未超过 6/10，因此没有替换基线。",
+      "tags": ["LeRobot", "HIL", "双臂操作"],
+      "video": "media/evo-rl/d0-success.mp4",
+      "poster": "media/evo-rl/d0-ep00-success-xiaomi-contact.png"
+    },
+    {
+      "number": "04",
+      "id": "acot-vla",
+      "kicker": "VLA · 比赛工程",
+      "title": "ACoT-VLA 竞赛闭环",
+      "description": "15 任务数据合同把 21D 扩到 32D，ACoT 30/30 经 OpenPI 和 Docker 进入官方评测，4K 后长训退化。",
+      "tags": ["ACoT-VLA", "R2A", "RoboChallenge"],
+      "video": "media/acot-vla/three-view-demo.mp4",
+      "poster": "media/acot-vla/three-view-demo-poster.jpg"
+    },
+    {
+      "number": "05",
+      "id": "robochallenge-g2",
+      "kicker": "真机 VLA · 官方评测",
+      "title": "RoboChallenge：G2 饮料抓取评测",
+      "description": "数据从约 2800 条收到 435 条高质量双手主集，三视角 sidecar 与 Pi0.5 一起进入在线安全和官方评测。",
+      "tags": ["VLA", "官方评测", "饮料抓取"],
+      "video": "media/robochallenge-g2/grasp-success.mp4",
+      "poster": "media/robochallenge-g2/grasp-success.png"
+    }
+  ]
+}
