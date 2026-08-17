@@ -11,7 +11,7 @@
     "resumeHref": ""
   },
   "projectHeading": "项目",
-  "projectIntro": "五个项目都从当前文档和本地素材重写。首页先看视频，点进详情后仍留在这一页，继续看架构、过程图和结果。",
+  "projectIntro": "四个核心项目均来自真实工程、代码、实验记录和项目素材。首页先看结果与视频，进入详情后继续查看系统架构、实现过程、失败复盘与事实边界。",
   "projects": [
     {
       "number": "01",
@@ -46,20 +46,10 @@
     {
       "number": "04",
       "id": "acot-vla",
-      "kicker": "VLA · 比赛工程",
-      "title": "ACoT-VLA 竞赛闭环",
-      "description": "15 任务数据合同把 21D 扩到 32D，ACoT 30/30 经 OpenPI 和 Docker 进入官方评测，4K 后长训退化。",
-      "tags": ["ACoT-VLA", "R2A", "RoboChallenge"],
-      "video": "media/acot-vla/three-view-demo.mp4",
-      "poster": "media/acot-vla/three-view-demo-poster.jpg"
-    },
-    {
-      "number": "05",
-      "id": "robochallenge-g2",
-      "kicker": "真机 VLA · 官方评测",
-      "title": "RoboChallenge：G2 饮料抓取评测",
-      "description": "数据从约 2800 条收到 435 条高质量双手主集，三视角 sidecar 与 Pi0.5 一起进入在线安全和官方评测。",
-      "tags": ["VLA", "官方评测", "饮料抓取"],
+      "kicker": "VLA · 仿真训练 · VR 示教 · G2 真机",
+      "title": "VLA 比赛系统 · ACoT-VLA + Quest 3 + RoboChallenge G2",
+      "description": "从 R2A 15任务 ACoT/OpenPI 仿真训练，到 Quest 3 示教采集，再到 G2 真机 Pi0.5、数据治理、Vision Sidecar 与官方评测：4K=0.389，单目标 79 分 / SR 0.6。",
+      "tags": ["ACoT / OpenPI", "Quest 3 / LeRobot", "Pi0.5 / G2"],
       "video": "media/robochallenge-g2/grasp-success.mp4",
       "poster": "media/robochallenge-g2/grasp-success.png"
     }
