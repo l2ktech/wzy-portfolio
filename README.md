@@ -33,3 +33,32 @@ npx serve dist        # 或任意静态服务器打开 dist/index.html
 - 只包含用于公开展示的项目媒体（视频、架构图、过程图、头像）。
 - 简历/面试私密资料、内部文档、账号信息**不进入本仓库**。
 - 项目指标与证据边界以各项目正文表述为准，详情页文字沿用 Obsidian 真源的公开口径。
+
+---
+
+## 项目媒体预览（仓库内直接可看）
+
+### 01 · TOP 双五轴镜像测厚
+<video controls muted playsinline preload="metadata" poster="media/top/13_dual_head_axis_layout.png" src="media/top/five-axis-control.mp4"></video>
+
+![双五轴布局](media/top/13_dual_head_axis_layout.png)
+
+### 02 · PAROL6 六轴机械臂
+<video controls muted playsinline preload="metadata" poster="media/parol6/grasp-lift.png" src="media/parol6/isaac-orbit.mp4"></video>
+
+![PAROL6 系统总架构](media/parol6/system-architecture.png)
+
+### 03 · Evo-RL 毛巾折叠
+<video controls muted playsinline preload="metadata" poster="media/evo-rl/d0-ep00-success-xiaomi-contact.png" src="media/evo-rl/d0-success.mp4"></video>
+
+![D0 成功回合](media/evo-rl/d0-ep00-success-xiaomi-contact.png)
+
+### 04 · ACoT-VLA 竞赛闭环
+<video controls muted playsinline preload="metadata" poster="media/acot-vla/three-view-demo-poster.jpg" src="media/acot-vla/three-view-demo.mp4"></video>
+
+![ACoT-VLA 系统总架构](media/acot-vla/system-architecture.png)
+
+### 05 · RoboChallenge G2 饮料抓取
+<video controls muted playsinline preload="metadata" poster="media/robochallenge-g2/grasp-success.png" src="media/robochallenge-g2/grasp-success.mp4"></video>
+
+![G2 系统总览](media/robochallenge-g2/system-overview.png)

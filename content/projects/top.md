@@ -1,5 +1,10 @@
 双五轴镜像铣里，刀具侧和支撑侧隔着薄壁工件相向运动。系统把五种信号——超声回波、四路电涡流、轴向压力、水压、线激光——组织成一条闭环：超声算厚度，电涡流定法向，压力管安全，水压管耦合质量，线激光给轮廓点云。厚度先过波形滤波和质量门，再走一维 Kalman 平滑和异常门，最后把补偿量喂到增量式 PID 做受限补偿。
 
+<figure>
+<img src="media/top/13_dual_head_axis_layout.png" alt="双五轴布局示意">
+<figcaption>双五轴布局：刀具侧与支撑侧测头/转台的轴向定义与运动方向。</figcaption>
+</figure>
+
 ```mermaid
 flowchart TD
   A["超声 / 电涡流 / 压力 / 水压 / 线激光"] --> B["质量门 + 时间戳"]
@@ -18,6 +23,16 @@ flowchart TD
 
 ## 估计与补偿
 `KalmanFilter.cpp` 做一维状态估计，按 Q/R 加权融合、创新残差门限拒绝异常。`WCSUB.SPF` 里是死区、参数渐入、变速积分、增量式 PID、单步和总量限幅，异常时保持、降速或抬刀。
+
+
+<figure>
+<img src="media/top/09_ultrasonic_wave_filtered_stable.jpg" alt="超声回波波形">
+<figcaption>超声回波波形：门限与游标标记下的界面/底面回波，用于壁厚计算。</figcaption>
+</figure>
+<figure>
+<img src="media/top/thickness-trace.png" alt="壁厚测量轨迹">
+<figcaption>壁厚测量轨迹：实测厚度、滤波厚度与目标厚度的随测点分布。</figcaption>
+</figure>
 
 ## 能确认的结果
 壁厚补偿精度 ±0.05 mm，测厚精度 ±0.01 mm，采样 200 Hz。这是团队口径：我负责跨模块联调和软件分析，D-S 融合和 MPC 是我和同事一起实现的。

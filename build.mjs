@@ -87,7 +87,7 @@ const heroButtons = [
 const cards = projects.map(p => `
   <article class="card" id="card-${p.id}">
     <a class="card-media" href="#project-${p.id}" aria-label="${p.title} 项目视频">
-      <video muted playsinline preload="metadata" poster="${p.poster}" src="${p.video}"></video>
+      <video controls muted playsinline preload="metadata" poster="${p.poster}" src="${p.video}"></video>
       <span class="card-play">▶</span>
     </a>
     <div class="card-body">
