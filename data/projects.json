@@ -16,12 +16,12 @@
     {
       "number": "01",
       "id": "top",
-      "kicker": "工业控制 · 双五轴",
-      "title": "TOP 双五轴镜像测厚",
-      "description": "超声回波经 C++/Qt、上位机和补偿进入双五轴控制，离线由 NX 运动学映射和仿真放行。",
-      "tags": ["C++ / Qt", "超声测厚"],
-      "video": "media/top/five-axis-control.mp4",
-      "poster": "media/top/13_dual_head_axis_layout.png"
+      "kicker": "工业测量 · C++ / Qt",
+      "title": "TOP · 双五轴超声测厚系统",
+      "description": "基于 DPL 板卡与 C++/Qt 的超声在线测厚系统，覆盖 A 扫采集、厚度计算、数据有效性、一维 Kalman、64B 通信协议、日志与线程时序。",
+      "tags": ["C++ / Qt", "超声测厚", "工业通信"],
+      "video": "media/top/ultrasound-waveform.mp4",
+      "poster": "media/top/09_ultrasonic_wave_filtered_stable.jpg"
     },
     {
       "number": "02",
