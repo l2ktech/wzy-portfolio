@@ -5,14 +5,13 @@
  * 零依赖：node build.mjs
  */
 import { readFileSync, writeFileSync, mkdirSync, cpSync, existsSync } from 'node:fs'
-import { dirname, join, resolve } from 'node:path'
+import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = dirname(fileURLToPath(import.meta.url))
 const dist = join(root, 'dist')
 const data = JSON.parse(readFileSync(join(root, 'data/projects.json'), 'utf8'))
 
-// ---------- 极简 Markdown -> HTML ----------
 function mdInline(s) {
   return s
     .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) => `<img src="${src.replace(/\/portfolio\//g, 'media/')}" alt="${alt}" loading="lazy">`)
@@ -33,18 +32,15 @@ function mdToHtml(md) {
       const buf = []
       i++
       while (i < lines.length && !lines[i].startsWith('```')) { buf.push(lines[i]); i++ }
-      i++ // closing fence
-      if (lang === 'mermaid') {
-        html += `<div class="mermaid">${esc(buf.join('\n'))}</div>\n`
-      } else {
-        html += `<pre><code>${esc(buf.join('\n'))}</code></pre>\n`
-      }
+      i++
+      html += lang === 'mermaid'
+        ? `<div class="mermaid">${esc(buf.join('\n'))}</div>\n`
+        : `<pre><code>${esc(buf.join('\n'))}</code></pre>\n`
       continue
     }
     if (/^#{1,4}\s/.test(line)) {
       const level = line.match(/^(#+)/)[1].length
-      const text = mdInline(line.replace(/^#+\s*/, ''))
-      html += `<h${Math.min(level + 1, 3)}>${text}</h${Math.min(level + 1, 3)}>\n`
+      html += `<h${Math.min(level + 1, 3)}>${mdInline(line.replace(/^#+\s*/, ''))}</h${Math.min(level + 1, 3)}>\n`
       i++
       continue
     }
@@ -67,7 +63,6 @@ function mdToHtml(md) {
   return html
 }
 
-// ---------- 数据 ----------
 const hero = data.hero
 const projects = data.projects.map(p => ({
   ...p,
@@ -76,9 +71,8 @@ const projects = data.projects.map(p => ({
     : ''
 }))
 
-// ---------- 页面模板 ----------
 const heroButtons = [
-  { label: hero.viewProjectsLabel || 'View Projects', href: '#projects', primary: true, cls: 'js-scroll' },
+  { label: hero.viewProjectsLabel || 'View Projects', href: '#projects', primary: true },
   { label: hero.githubLabel || 'GitHub', href: hero.githubHref, primary: false, icon: 'gh' },
   { label: 'LinkedIn', href: hero.linkedinHref, primary: false },
   { label: 'Resume', href: hero.resumeHref, primary: false },
@@ -100,7 +94,6 @@ const cards = projects.map(p => `
   </article>`).join('\n')
 
 const projectData = JSON.stringify(projects).replace(/</g, '\\u003c')
-
 const html = `<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -111,146 +104,37 @@ const html = `<!doctype html>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 <style>
 :root{--bg:#ffffff;--ink:#171717;--muted:#6b7280;--accent:#b45309;--accent-soft:#fef3e2;--line:#e7e5e4;--card:#ffffff;}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth}
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
-h1,h2,h3,.serif{font-family:Georgia,"Songti SC","Noto Serif SC",serif;font-weight:600;letter-spacing:.01em}
-/* hero */
-header.hero{display:flex;align-items:center;gap:56px;padding:88px 0 72px;border-bottom:1px solid var(--line)}
-.hero-copy{flex:1}
-.hero-role{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
-.hero-name{font-size:52px;line-height:1.15}
-.hero-about{color:var(--muted);font-size:16px;margin-top:18px;max-width:520px}
-.hero-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:999px;font-size:14px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:#fff;transition:.15s}
-.btn:hover{border-color:var(--ink)}
-.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
-.btn.primary:hover{background:#000}
-.btn svg{width:15px;height:15px}
-.hero-photo{flex-shrink:0}
-.hero-photo img{width:208px;height:208px;border-radius:50%;object-fit:cover;border:5px solid #fff;box-shadow:0 0 0 1px var(--line),0 18px 40px rgba(0,0,0,.08)}
-/* section */
-main{padding:64px 0 40px}
-.section-title{font-size:30px}
-.section-intro{color:var(--muted);margin-top:10px;max-width:620px}
-/* cards */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:.18s}
-.card:hover{box-shadow:0 16px 40px rgba(0,0,0,.07);transform:translateY(-2px)}
-.card-media{position:relative;display:block;aspect-ratio:16/9;background:#0c0c0c}
-.card-media video{width:100%;height:100%;object-fit:contain}
-.card-play{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.55);color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;backdrop-filter:blur(4px)}
-.card-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
-.kicker{color:var(--accent);font-size:12.5px;letter-spacing:.08em}
-.card-title{font-size:20px}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-size:12px;color:#444;background:var(--accent-soft);border:1px solid #f3d9b3;border-radius:999px;padding:3px 10px}
-.card-desc{color:var(--muted);font-size:14px}
-.detail-link{color:var(--accent);font-size:14px;text-decoration:none;margin-top:auto;font-weight:600}
-.detail-link:hover{text-decoration:underline}
-/* detail */
-.detail{display:none}
-.detail.open{display:block}
-.back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:14px;margin-bottom:18px}
-.back:hover{color:var(--ink)}
-.detail-head .kicker{font-size:14px}
-.detail-title{font-size:36px;margin-top:4px}
-.detail-tags{margin:14px 0 6px}
-.detail-body{margin-top:22px;max-width:760px;color:#333}
-.detail-body p{margin:14px 0}
-.detail-body h2{font-size:22px;margin:34px 0 6px;padding-top:8px}
-.detail-body h3{font-size:17px;margin:24px 0 4px}
-.detail-body ul{margin:10px 0 14px;padding-left:22px}
-.detail-body li{margin:4px 0}
-.detail-body img{max-width:100%;border-radius:12px;border:1px solid var(--line);display:block;margin:16px 0}
-.detail-body video{width:100%;border-radius:12px;background:#000;margin:14px 0}
-.detail-body figure{margin:18px 0}
-.detail-body figcaption{font-size:13px;color:var(--muted);margin-top:6px}
-.detail-body pre{background:#fafaf9;border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;font-size:13px;margin:14px 0}
-.detail-body .mermaid{background:#fafaf9;border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto;text-align:center}
-/* footer */
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px} h1,h2,h3,.serif{font-family:Georgia,"Songti SC","Noto Serif SC",serif;font-weight:600;letter-spacing:.01em}
+header.hero{display:flex;align-items:center;gap:56px;padding:88px 0 72px;border-bottom:1px solid var(--line)} .hero-copy{flex:1}.hero-role{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}.hero-name{font-size:52px;line-height:1.15}.hero-about{color:var(--muted);font-size:16px;margin-top:18px;max-width:520px}.hero-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:999px;font-size:14px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:#fff;transition:.15s}.btn:hover{border-color:var(--ink)}.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}.btn.primary:hover{background:#000}.btn svg{width:15px;height:15px}.hero-photo{flex-shrink:0}.hero-photo img{width:208px;height:208px;border-radius:50%;object-fit:cover;border:5px solid #fff;box-shadow:0 0 0 1px var(--line),0 18px 40px rgba(0,0,0,.08)}
+main{padding:64px 0 40px}.section-title{font-size:30px}.section-intro{color:var(--muted);margin-top:10px;max-width:620px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:.18s}.card:hover{box-shadow:0 16px 40px rgba(0,0,0,.07);transform:translateY(-2px)}.card-media{position:relative;display:block;aspect-ratio:16/9;background:#0c0c0c}.card-media video{width:100%;height:100%;object-fit:contain}.card-play{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.55);color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;backdrop-filter:blur(4px)}.card-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}.kicker{color:var(--accent);font-size:12.5px;letter-spacing:.08em}.card-title{font-size:20px}.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:12px;color:#444;background:var(--accent-soft);border:1px solid #f3d9b3;border-radius:999px;padding:3px 10px}.card-desc{color:var(--muted);font-size:14px}.detail-link{color:var(--accent);font-size:14px;text-decoration:none;margin-top:auto;font-weight:600}.detail-link:hover{text-decoration:underline}
+.detail{display:none}.detail.open{display:block}.back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:14px;margin-bottom:18px}.back:hover{color:var(--ink)}.detail-head .kicker{font-size:14px}.detail-title{font-size:36px;margin-top:4px}.detail-tags{margin:14px 0 6px}.detail-body{margin-top:22px;max-width:760px;color:#333}.detail-body p{margin:14px 0}.detail-body h2{font-size:22px;margin:34px 0 6px;padding-top:8px}.detail-body h3{font-size:17px;margin:24px 0 4px}.detail-body ul{margin:10px 0 14px;padding-left:22px}.detail-body li{margin:4px 0}.detail-body img{max-width:100%;border-radius:12px;border:1px solid var(--line);display:block;margin:16px 0}.detail-body video{width:100%;border-radius:12px;background:#000;margin:14px 0}.detail-body figure{margin:18px 0}.detail-body figcaption{font-size:13px;color:var(--muted);margin-top:6px}.detail-body pre{background:#fafaf9;border:1px solid var(--line);border-radius:10px;padding:14px;overflow-x:auto;font-size:13px;margin:14px 0}.detail-body .mermaid{background:#fafaf9;border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0;overflow-x:auto;text-align:center}
 footer{padding:36px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-/* mobile */
-@media (max-width:760px){
-  header.hero{flex-direction:column-reverse;text-align:center;padding:56px 0 48px;gap:28px}
-  .hero-about{max-width:none}
-  .hero-btns{justify-content:center}
-  .hero-photo img{width:156px;height:156px}
-  .hero-name{font-size:38px}
-  .grid{grid-template-columns:1fr}
-  .detail-title{font-size:28px}
-}
+@media (max-width:760px){header.hero{flex-direction:column-reverse;text-align:center;padding:56px 0 48px;gap:28px}.hero-about{max-width:none}.hero-btns{justify-content:center}.hero-photo img{width:156px;height:156px}.hero-name{font-size:38px}.grid{grid-template-columns:1fr}.detail-title{font-size:28px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header class="hero">
-    <div class="hero-copy">
-      <p class="hero-role">${hero.role}</p>
-      <h1 class="hero-name">${hero.name}</h1>
-      <p class="hero-about">${hero.about}</p>
-      <div class="hero-btns">
-        ${heroButtons.map(b => b.href.startsWith('#')
-          ? `<a class="btn ${b.primary ? 'primary' : ''}" href="${b.href}">${b.icon ? githubSvg() : ''}${b.label}</a>`
-          : `<a class="btn ${b.primary ? 'primary' : ''}" href="${b.href}" target="_blank" rel="noopener">${b.icon ? githubSvg() : ''}${b.label}</a>`).join('\n        ')}
-      </div>
-    </div>
-    <div class="hero-photo"><img src="${hero.profileImage}" alt="${hero.name}"></div>
-  </header>
-
-  <main id="projects">
-    <h2 class="section-title">${data.projectHeading || '项目'}</h2>
-    <p class="section-intro">${data.projectIntro || ''}</p>
-    <section class="grid" id="project-grid">${cards}</section>
-  </main>
-
-  <section class="detail" id="detail"></section>
-
-  <footer>
-    <span>© ${new Date().getFullYear()} ${hero.name}</span>
-    <span>五个项目 · 视频来自真实项目素材</span>
-  </footer>
+<header class="hero"><div class="hero-copy"><p class="hero-role">${hero.role}</p><h1 class="hero-name">${hero.name}</h1><p class="hero-about">${hero.about}</p><div class="hero-btns">${heroButtons.map(b => b.href.startsWith('#') ? `<a class="btn ${b.primary ? 'primary' : ''}" href="${b.href}">${b.icon ? githubSvg() : ''}${b.label}</a>` : `<a class="btn ${b.primary ? 'primary' : ''}" href="${b.href}" target="_blank" rel="noopener">${b.icon ? githubSvg() : ''}${b.label}</a>`).join('\n')}</div></div><div class="hero-photo"><img src="${hero.profileImage}" alt="${hero.name}"></div></header>
+<main id="projects"><h2 class="section-title">${data.projectHeading || '项目'}</h2><p class="section-intro">${data.projectIntro || ''}</p><section class="grid" id="project-grid">${cards}</section></main>
+<section class="detail" id="detail"></section>
+<footer><span>© ${new Date().getFullYear()} ${hero.name}</span><span>${projects.length} 个项目 · 视频来自真实项目素材</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <script>
 const PROJECTS = ${projectData};
-const hero = ${JSON.stringify(hero)};
-function githubSvg(){return '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>'}
-function openDetail(id){
-  const p = PROJECTS.find(x => x.id === id); if(!p) return
-  document.getElementById('project-grid').style.display = 'none'
-  const d = document.getElementById('detail')
-  d.className = 'detail open'
-  d.innerHTML = \`
-    <a class="back" href="#projects">← 返回项目</a>
-    <div class="detail-head">
-      <p class="kicker">\${p.number} · \${p.kicker}</p>
-      <h1 class="detail-title serif">\${p.title}</h1>
-      <div class="tags detail-tags">\${p.tags.map(t => '<span class="tag">'+t+'</span>').join('')}</div>
-    </div>
-    <div class="detail-body">\${p.detailHtml || '<p>详情整理中。</p>'}</div>
-  \`
-  window.scrollTo({top:0,behavior:'smooth'})
-  if (window.mermaid) { try { mermaid.run({querySelector:'.detail .mermaid'}) } catch(e){} }
-}
-function closeDetail(){ document.getElementById('detail').className='detail'; document.getElementById('project-grid').style.display=''; }
-window.addEventListener('hashchange', () => {
-  const m = location.hash.match(/^#project-(.+)$/)
-  if (m) openDetail(m[1])
-  else if (location.hash === '#projects') closeDetail()
-})
-if (location.hash.match(/^#project-/)) { openDetail(location.hash.match(/^#project-(.+)$/)[1]) }
-document.querySelectorAll('.card').forEach(c => {
-  c.addEventListener('click', e => { if (e.target.closest('a')) return; location.hash = '#project-' + c.id.replace('card-','') })
-})
+function openDetail(id){const p=PROJECTS.find(x=>x.id===id);if(!p)return;document.getElementById('project-grid').style.display='none';const d=document.getElementById('detail');d.className='detail open';d.innerHTML='<a class="back" href="#projects">← 返回项目</a><div class="detail-head"><p class="kicker">'+p.number+' · '+p.kicker+'</p><h1 class="detail-title serif">'+p.title+'</h1><div class="tags detail-tags">'+p.tags.map(t=>'<span class="tag">'+t+'</span>').join('')+'</div></div><div class="detail-body">'+(p.detailHtml||'<p>详情整理中。</p>')+'</div>';window.scrollTo({top:0,behavior:'smooth'});if(window.mermaid){try{mermaid.run({querySelector:'.detail .mermaid'})}catch(e){}}}
+function closeDetail(){document.getElementById('detail').className='detail';document.getElementById('project-grid').style.display=''}
+window.addEventListener('hashchange',()=>{const m=location.hash.match(/^#project-(.+)$/);if(m)openDetail(m[1]);else if(location.hash==='#projects')closeDetail()})
+if(location.hash.match(/^#project-/))openDetail(location.hash.match(/^#project-(.+)$/)[1])
+document.querySelectorAll('.card').forEach(c=>{c.addEventListener('click',e=>{if(e.target.closest('a'))return;location.hash='#project-'+c.id.replace('card-','')})})
 </script>
 </body>
-</html>
-`
+</html>`
 function githubSvg(){return '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>'}
-
-mkdirSync(dist, { recursive: true })
-writeFileSync(join(dist, 'index.html'), html, 'utf8')
-cpSync(join(root, 'media'), join(dist, 'media'), { recursive: true })
+mkdirSync(dist,{recursive:true})
+writeFileSync(join(dist,'index.html'),html,'utf8')
+cpSync(join(root,'media'),join(dist,'media'),{recursive:true})
 console.log(`built dist/index.html (${projects.length} projects, ${(html.length/1024).toFixed(0)} KB html, media copied)`)
