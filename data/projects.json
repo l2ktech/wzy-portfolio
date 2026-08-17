@@ -36,10 +36,10 @@
     {
       "number": "03",
       "id": "evo-rl",
-      "kicker": "双臂操作 · 强化学习",
-      "title": "Evo-RL 毛巾折叠",
-      "description": "SO-101 双臂毛巾折叠从 D0 基线走到 HIL 和 Value / ACP，候选微调未超过 6/10，因此没有替换基线。",
-      "tags": ["LeRobot", "HIL", "双臂操作"],
+      "kicker": "双臂 VLA · HIL / Evo-RL",
+      "title": "Evo-RL · SO101 双臂毛巾折叠",
+      "description": "基于 Pi0.5 和 LeRobot 构建双臂毛巾折叠真机学习闭环：分阶段训练 D0、HIL 定向纠错、Value→Advantage→ACP 再训练，并用 action-chain 排障和固定协议真机复测；当前批次从 6/10 到 7/10。",
+      "tags": ["Pi0.5 / LeRobot", "HIL / Evo-RL", "双臂操作"],
       "video": "media/evo-rl/d0-success.mp4",
       "poster": "media/evo-rl/d0-ep00-success-xiaomi-contact.png"
     },
