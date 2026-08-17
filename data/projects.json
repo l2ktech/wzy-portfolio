@@ -26,12 +26,12 @@
     {
       "number": "02",
       "id": "parol6",
-      "kicker": "运动规划 · 真机安全",
-      "title": "PAROL6 六轴机械臂",
-      "description": "ROS 2 / MoveIt 规划经碰撞审计和版本化 IPC，进入唯一 SocketCAN 执行核心，并回到安全终态。",
-      "tags": ["ROS 2", "MoveIt 2", "SocketCAN"],
+      "kicker": "机器人系统 · VLM 抓取 · 真机安全",
+      "title": "PAROL6 六轴闭环机械臂",
+      "description": "从 X42S / SocketCAN 到 ROS 2 / MoveIt 2、D405、GR-ConvNet 与 VLM，打通可审计的真机抓放闭环；同时保留手眼未签发和多物体 2/15 的真实边界。",
+      "tags": ["ROS 2 / MoveIt 2", "RGB-D / VLM", "SocketCAN"],
       "video": "media/parol6/isaac-orbit.mp4",
-      "poster": "media/parol6/grasp-lift.png"
+      "poster": "media/parol6/hero.png"
     },
     {
       "number": "03",
