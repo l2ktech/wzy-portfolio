@@ -16,10 +16,10 @@
     {
       "number": "01",
       "id": "top",
-      "kicker": "工业测量 · C++ / Qt",
-      "title": "TOP · 双五轴超声在线测厚",
-      "description": "为薄壁件在线检测搭建超声测厚链路：DPL 板卡采集 A 扫回波，C++/Qt 完成解析、厚度计算、有效性判断、显示、日志与网络输出。",
-      "tags": ["C++ / Qt", "超声测厚", "工业通信"],
+      "kicker": "双五轴控制 · 多传感器融合 · C++ / Qt",
+      "title": "TOP · 双五轴镜像测厚闭环系统",
+      "description": "面向薄壁件加工与在线检测，打通双五轴协同运动、超声/电涡流/压力/水压/线激光感知、坐标与运动学、状态估计、PID/MPC 补偿以及 C++/Qt 工业软件闭环。",
+      "tags": ["多轴运动学", "多传感器融合", "C++ / Qt"],
       "video": "media/top/ultrasound-waveform.mp4",
       "poster": "media/top/09_ultrasonic_wave_filtered_stable.jpg"
     },
