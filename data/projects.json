@@ -11,14 +11,14 @@
     "resumeHref": ""
   },
   "projectHeading": "项目",
-  "projectIntro": "四个核心项目均来自真实工程、代码、实验记录和项目素材。首页先看结果与视频，进入详情后继续查看系统架构、实现过程、失败复盘与事实边界。",
+  "projectIntro": "四个项目覆盖工业测量、机器人系统、双臂学习与 VLA 真机。每个详情页优先回答：项目是什么、我做了什么、系统怎么工作、结果怎样；需要深入时再继续看技术细节和项目素材。",
   "projects": [
     {
       "number": "01",
       "id": "top",
       "kicker": "工业测量 · C++ / Qt",
-      "title": "TOP · 双五轴超声测厚系统",
-      "description": "基于 DPL 板卡与 C++/Qt 的超声在线测厚系统，覆盖 A 扫采集、厚度计算、数据有效性、一维 Kalman、64B 通信协议、日志与线程时序。",
+      "title": "TOP · 双五轴超声在线测厚",
+      "description": "为薄壁件在线检测搭建超声测厚链路：DPL 板卡采集 A 扫回波，C++/Qt 完成解析、厚度计算、有效性判断、显示、日志与网络输出。",
       "tags": ["C++ / Qt", "超声测厚", "工业通信"],
       "video": "media/top/ultrasound-waveform.mp4",
       "poster": "media/top/09_ultrasonic_wave_filtered_stable.jpg"
@@ -26,9 +26,9 @@
     {
       "number": "02",
       "id": "parol6",
-      "kicker": "机器人系统 · VLM 抓取 · 真机安全",
-      "title": "PAROL6 六轴闭环机械臂",
-      "description": "从 X42S / SocketCAN 到 ROS 2 / MoveIt 2、D405、GR-ConvNet 与 VLM，打通可审计的真机抓放闭环；同时保留手眼未签发和多物体 2/15 的真实边界。",
+      "kicker": "ROS 2 · RGB-D 抓取 · 真机安全",
+      "title": "PAROL6 · 六轴机械臂抓取系统",
+      "description": "围绕六轴机械臂打通 SocketCAN → ROS 2 / MoveIt 2 → D405 RGB-D → 抓取 → 安全执行的真机闭环，并把 VLM 限制在语义选目标层。",
       "tags": ["ROS 2 / MoveIt 2", "RGB-D / VLM", "SocketCAN"],
       "video": "media/parol6/isaac-orbit.mp4",
       "poster": "media/parol6/hero.png"
@@ -36,9 +36,9 @@
     {
       "number": "03",
       "id": "evo-rl",
-      "kicker": "双臂 VLA · HIL / Evo-RL",
+      "kicker": "双臂学习 · HIL · Evo-RL",
       "title": "Evo-RL · SO101 双臂毛巾折叠",
-      "description": "基于 Pi0.5 和 LeRobot 构建双臂毛巾折叠真机学习闭环：分阶段训练 D0、HIL 定向纠错、Value→Advantage→ACP 再训练，并用 action-chain 排障和固定协议真机复测；当前批次从 6/10 到 7/10。",
+      "description": "用 SO101 双臂完成毛巾折叠：从分阶段示教和 Pi0.5 基线，到 HIL 定向纠错、Value / Advantage / ACP 再训练与真机复测。",
       "tags": ["Pi0.5 / LeRobot", "HIL / Evo-RL", "双臂操作"],
       "video": "media/evo-rl/d0-success.mp4",
       "poster": "media/evo-rl/d0-ep00-success-xiaomi-contact.png"
@@ -47,8 +47,8 @@
       "number": "04",
       "id": "acot-vla",
       "kicker": "VLA · 仿真训练 · VR 示教 · G2 真机",
-      "title": "VLA 比赛系统 · ACoT-VLA + Quest 3 + RoboChallenge G2",
-      "description": "从 R2A 15任务 ACoT/OpenPI 仿真训练，到 Quest 3 示教采集，再到 G2 真机 Pi0.5、数据治理、Vision Sidecar 与官方评测：4K=0.389，单目标 79 分 / SR 0.6。",
+      "title": "ACoT-VLA · 多任务训练与 G2 真机",
+      "description": "把多任务 VLA 仿真训练、Quest 3 示教采集与 G2 真机部署连接起来，重点解决数据合同、checkpoint 选择、数据治理、视觉确认与安全执行。",
       "tags": ["ACoT / OpenPI", "Quest 3 / LeRobot", "Pi0.5 / G2"],
       "video": "media/robochallenge-g2/grasp-success.mp4",
       "poster": "media/robochallenge-g2/grasp-success.png"
