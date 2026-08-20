@@ -74,9 +74,9 @@ VLM 只返回候选目标 ID 和置信度。目标的三维坐标仍由 RGB-D �
 
 项目已完成 **20 mm 白色方块的真机完整抓放闭环**：视觉选取、接近、闭爪确认、抬升、移动到释放位、开爪以及安全终态都走同一条执行链。
 
-![真机抓取成功：接触确认](media/parol6/success-066-01_抓取成功-01_两次中的第一次-contact.png)
+![真机抓取与抬升过程（连续帧）](media/parol6/success-066-01_抓取成功-01_两次中的第一次-contact.png)
 
-![释放位](media/parol6/release.png)
+![释放位姿（RViz 规划视图）](media/parol6/release.png)
 
 ![连续抓取成功成片](media/parol6/parol6-three-successes.mp4)
 
