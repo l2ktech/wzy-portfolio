@@ -91,8 +91,6 @@ Value Model 根据多相机图像、任务文本和 robot state 估计当前状�
 
 ![D0 成功回合 08](media/evo-rl/d0-ep08-success-xiaomi-contact.png)
 
-![三次连续成功成片](media/evo-rl/evo-rl-three-successes.mp4)
-
 当前验证范围为 **Level 1：初始状态相对平整的毛巾**；更凌乱的随机初始状态需要额外的找角、展开和失败恢复能力。
 
 ## 技术栈

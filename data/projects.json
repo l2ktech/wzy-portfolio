@@ -24,7 +24,7 @@
         "多传感器融合",
         "C++ / Qt"
       ],
-      "video": "media/top/top-sequence.mp4",
+      "video": "media/top/top-sequence.gif",
       "poster": "media/top/13_dual_head_axis_layout.png"
     },
     {
@@ -38,7 +38,7 @@
         "RGB-D / VLM",
         "SocketCAN"
       ],
-      "video": "media/parol6/parol6-nostamp.mp4",
+      "video": "media/parol6/parol6.gif",
       "poster": "media/parol6/poster.jpg"
     },
     {
@@ -52,7 +52,7 @@
         "HIL / Evo-RL",
         "双臂操作"
       ],
-      "video": "media/evo-rl/evo-rl-cropped.mp4",
+      "video": "media/evo-rl/evo-rl.gif",
       "poster": "media/evo-rl/poster.jpg"
     },
     {
@@ -66,7 +66,7 @@
         "Quest 3 / LeRobot",
         "多任务仿真"
       ],
-      "video": "media/acot-vla/vr-clean-desktop-3view-demo.mp4",
+      "video": "media/acot-vla/acot-vla.gif",
       "poster": "media/acot-vla/poster.jpg"
     },
     {
@@ -80,7 +80,7 @@
         "Vision Sidecar",
         "官方评测"
       ],
-      "video": "media/robochallenge-g2/grasp-success.mp4",
+      "video": "media/robochallenge-g2/g2-real.gif",
       "poster": "media/robochallenge-g2/training-cameraview.png"
     }
   ]
