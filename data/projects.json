@@ -1,8 +1,8 @@
 {
   "hero": {
     "name": "王泽瑜",
-    "role": "ROBOTICS · CONTROL · EMBODIED AI",
-    "about": "我专注于机器人系统与具身智能工程，持续打通工业多轴控制、机械臂规划执行、双臂操作与 VLA 训练评测的完整链路。",
+    "role": "机器人 · 控制 · 具身智能",
+    "about": "专注机器人系统与具身智能工程，覆盖工业多轴控制、机械臂规划执行、双臂操作和 VLA 训练评测。",
     "profileImage": "media/profile/wang-zeyu.jpg",
     "githubHref": "https://github.com/l2ktech",
     "githubLabel": "GitHub",
@@ -11,27 +11,35 @@
     "resumeHref": ""
   },
   "projectHeading": "项目",
-  "projectIntro": "四个项目覆盖工业测量、机器人系统、双臂学习与 VLA 真机。每个详情页优先回答：项目是什么、我做了什么、系统怎么工作、结果怎样；需要深入时再继续看技术细节和项目素材。",
+  "projectIntro": "五个项目覆盖工业测量、机器人系统、双臂学习，以及 VLA 的仿真训练与 G2 真机。每个项目按“项目背景 → 关键工作 → 系统设计 → 项目结果”展开，可进一步查看技术细节与素材。",
   "projects": [
     {
       "number": "01",
       "id": "top",
       "kicker": "双五轴控制 · 多传感器融合 · C++ / Qt",
       "title": "TOP · 双五轴镜像测厚闭环系统",
-      "description": "面向薄壁件加工与在线检测，打通双五轴协同运动、超声/电涡流/压力/水压/线激光感知、坐标与运动学、状态估计、PID/MPC 补偿以及 C++/Qt 工业软件闭环。",
-      "tags": ["多轴运动学", "多传感器融合", "C++ / Qt"],
-      "video": "media/top/ultrasound-waveform.mp4",
-      "poster": "media/top/09_ultrasonic_wave_filtered_stable.jpg"
+      "description": "面向薄壁件加工与在线检测，覆盖双五轴协同运动、超声/电涡流/压力/水压/线激光感知、坐标与运动学、状态估计、PID/MPC 补偿和 C++/Qt 工业软件。",
+      "tags": [
+        "多轴运动学",
+        "多传感器融合",
+        "C++ / Qt"
+      ],
+      "video": "media/top/top-sequence.mp4",
+      "poster": "media/top/13_dual_head_axis_layout.png"
     },
     {
       "number": "02",
       "id": "parol6",
       "kicker": "ROS 2 · RGB-D 抓取 · 真机安全",
       "title": "PAROL6 · 六轴机械臂抓取系统",
-      "description": "围绕六轴机械臂打通 SocketCAN → ROS 2 / MoveIt 2 → D405 RGB-D → 抓取 → 安全执行的真机闭环，并把 VLM 限制在语义选目标层。",
-      "tags": ["ROS 2 / MoveIt 2", "RGB-D / VLM", "SocketCAN"],
-      "video": "media/parol6/isaac-orbit.mp4",
-      "poster": "media/parol6/hero.png"
+      "description": "围绕六轴机械臂走通 SocketCAN → ROS 2 / MoveIt 2 → D405 RGB-D → 抓取 → 安全执行的真机链路，VLM 只负责语义选目标。",
+      "tags": [
+        "ROS 2 / MoveIt 2",
+        "RGB-D / VLM",
+        "SocketCAN"
+      ],
+      "video": "media/parol6/parol6-nostamp.mp4",
+      "poster": "media/parol6/poster.jpg"
     },
     {
       "number": "03",
@@ -39,19 +47,41 @@
       "kicker": "双臂学习 · HIL · Evo-RL",
       "title": "Evo-RL · SO101 双臂毛巾折叠",
       "description": "用 SO101 双臂完成毛巾折叠：从分阶段示教和 Pi0.5 基线，到 HIL 定向纠错、Value / Advantage / ACP 再训练与真机复测。",
-      "tags": ["Pi0.5 / LeRobot", "HIL / Evo-RL", "双臂操作"],
-      "video": "media/evo-rl/d0-success.mp4",
-      "poster": "media/evo-rl/d0-ep00-success-xiaomi-contact.png"
+      "tags": [
+        "Pi0.5 / LeRobot",
+        "HIL / Evo-RL",
+        "双臂操作"
+      ],
+      "video": "media/evo-rl/evo-rl-cropped.mp4",
+      "poster": "media/evo-rl/poster.jpg"
     },
     {
       "number": "04",
       "id": "acot-vla",
-      "kicker": "VLA · 仿真训练 · VR 示教 · G2 真机",
-      "title": "ACoT-VLA · 多任务训练与 G2 真机",
-      "description": "把多任务 VLA 仿真训练、Quest 3 示教采集与 G2 真机部署连接起来，重点解决数据合同、checkpoint 选择、数据治理、视觉确认与安全执行。",
-      "tags": ["ACoT / OpenPI", "Quest 3 / LeRobot", "Pi0.5 / G2"],
+      "kicker": "VLA · 仿真训练 · Quest 3 示教",
+      "title": "ACoT-VLA · 多任务仿真训练",
+      "description": "在 AgiBotWorld R2A / GenieSim 中训练和评测多任务 VLA，并用 Quest 3 把人类示教转成结构化训练数据。",
+      "tags": [
+        "ACoT / OpenPI",
+        "Quest 3 / LeRobot",
+        "多任务仿真"
+      ],
+      "video": "media/acot-vla/vr-clean-desktop-3view-demo.mp4",
+      "poster": "media/acot-vla/poster.jpg"
+    },
+    {
+      "number": "05",
+      "id": "g2-real",
+      "kicker": "VLA · G2 真机 · 官方评测",
+      "title": "RoboChallenge · G2 真机抓取",
+      "description": "围绕超市货架抓取，用 435 条高质量双手数据微调 Pi0.5，并在主策略外加独立视觉确认与安全 Gate。",
+      "tags": [
+        "Pi0.5 / G2",
+        "Vision Sidecar",
+        "官方评测"
+      ],
       "video": "media/robochallenge-g2/grasp-success.mp4",
-      "poster": "media/robochallenge-g2/grasp-success.png"
+      "poster": "media/robochallenge-g2/training-cameraview.png"
     }
   ]
 }

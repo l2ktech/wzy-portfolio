@@ -1,6 +1,6 @@
 # 王泽瑜 · 个人作品集主页
 
-四个项目详情页（TOP / PAROL6 / Evo-RL / ACoT-VLA，其中 ACoT-VLA 包含 RoboChallenge G2 真机线）的静态展示主页，由 GitHub 仓库维护，push 到 `main` 后 GitHub Actions 自动构建并部署到 GitHub Pages。
+五个项目详情页（TOP / PAROL6 / Evo-RL / ACoT-VLA / RoboChallenge-G2）的静态展示主页，由 GitHub 仓库维护，push 到 `main` 后 GitHub Actions 自动构建并部署到 GitHub Pages。
 
 ## 在线地址
 
@@ -44,21 +44,21 @@ npx serve dist        # 或任意静态服务器打开 dist/index.html
 ![双五轴布局](media/top/13_dual_head_axis_layout.png)
 
 ### 02 · PAROL6 六轴机械臂
-<video controls muted playsinline preload="metadata" poster="media/parol6/grasp-lift.png" src="media/parol6/isaac-orbit.mp4"></video>
+<video controls muted playsinline preload="metadata" poster="media/parol6/hero.png" src="media/parol6/parol6-nostamp.mp4"></video>
 
 ![PAROL6 系统总架构](media/parol6/system-architecture.png)
 
 ### 03 · Evo-RL 毛巾折叠
-<video controls muted playsinline preload="metadata" poster="media/evo-rl/d0-ep00-success-xiaomi-contact.png" src="media/evo-rl/d0-success.mp4"></video>
+<video controls muted playsinline preload="metadata" poster="media/evo-rl/d0-ep00-success-xiaomi-contact.png" src="media/evo-rl/evo-rl-cropped.mp4"></video>
 
 ![D0 成功回合](media/evo-rl/d0-ep00-success-xiaomi-contact.png)
 
-### 04 · ACoT-VLA 竞赛闭环
-<video controls muted playsinline preload="metadata" poster="media/acot-vla/three-view-demo-poster.jpg" src="media/acot-vla/three-view-demo.mp4"></video>
+### 04 · ACoT-VLA 多任务仿真训练
+<video controls muted playsinline preload="metadata" poster="media/acot-vla/three-view-demo-poster.jpg" src="media/acot-vla/vr-clean-desktop-3view-demo.mp4"></video>
 
 ![ACoT-VLA 系统总架构](media/acot-vla/system-architecture.png)
 
-### ACoT-VLA 真机线 · RoboChallenge G2 饮料抓取
-<video controls muted playsinline preload="metadata" poster="media/robochallenge-g2/grasp-success.png" src="media/robochallenge-g2/grasp-success.mp4"></video>
+### 05 · RoboChallenge G2 真机抓取
+<video controls muted playsinline preload="metadata" poster="media/robochallenge-g2/system-overview.png" src="media/robochallenge-g2/grasp-success.mp4"></video>
 
 ![G2 系统总览](media/robochallenge-g2/system-overview.png)
