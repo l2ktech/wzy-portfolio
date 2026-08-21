@@ -68,7 +68,7 @@ D0 在固定流程下完成 **6/10** 次纯策略成功，成为后续改进的�
 
 每一帧同时记录策略原本动作、实际执行动作、是否人工介入以及 episode 成败。这样得到的数据不是新的"完美示教"，而是专门覆盖当前策略自己会访问到的失败状态。
 
-![HIL 人工接管纠错](media/evo-rl/hil-active-xiaomi.gif)
+![HIL 人工接管纠错](media/evo-rl/hil-active-xiaomi.mp4)
 
 ### 4. 用 Value / Advantage / ACP 做第二轮策略改进
 
