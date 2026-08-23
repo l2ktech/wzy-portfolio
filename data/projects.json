@@ -2,7 +2,7 @@
   "hero": {
     "name": "王泽瑜",
     "role": "机器人 · 控制 · 具身智能",
-    "about": "专注机器人系统与具身智能工程，覆盖工业多轴控制、机械臂规划执行、双臂操作和 VLA 训练评测。",
+    "about": "机器人系统与控制方向工程师，4 年+工业控制与实时系统研发经验。项目覆盖工业多轴与在线测厚、ROS2/MoveIt2 六轴机械臂整机，以及双臂 VLA 真机与仿真。",
     "profileImage": "media/profile/wang-zeyu.jpg",
     "githubHref": "https://github.com/l2ktech",
     "githubLabel": "GitHub",
@@ -11,17 +11,17 @@
     "resumeHref": ""
   },
   "projectHeading": "项目",
-  "projectIntro": "五个项目覆盖工业测量、机器人系统、双臂学习，以及 VLA 的仿真训练与 G2 真机。每个项目按“项目背景 → 关键工作 → 系统设计 → 项目结果”展开，可进一步查看技术细节与素材。",
+  "projectIntro": "五个项目沿着“工业多轴控制 → ROS2 机械臂整机 → 双臂学习 → VLA 仿真与真机评测”展开。每个项目按“项目背景 → 关键工作 → 系统设计 → 项目结果”展开，可进一步查看技术细节与素材。",
   "projects": [
     {
       "number": "01",
       "id": "top",
-      "kicker": "双五轴控制 · 多传感器融合 · C++ / Qt",
+      "kicker": "双五轴控制 · 在线测厚 · C++ / Qt",
       "title": "TOP · 双五轴镜像测厚闭环系统",
-      "description": "面向薄壁件加工与在线检测，覆盖双五轴协同运动、超声/电涡流/压力/水压/线激光感知、坐标与运动学、状态估计、PID/MPC 补偿和 C++/Qt 工业软件。",
+      "description": "面向薄壁件加工与在线检测，覆盖双五轴协同、超声测厚、电涡流法向、线激光点云、坐标与运动学、Kalman 状态估计、增量 PID 与 C++/Qt 工业软件联调。",
       "tags": [
         "多轴运动学",
-        "多传感器融合",
+        "Kalman / PID",
         "C++ / Qt"
       ],
       "video": "media/top/top-sequence.gif",
@@ -30,13 +30,13 @@
     {
       "number": "02",
       "id": "parol6",
-      "kicker": "ROS 2 · RGB-D 抓取 · 真机安全",
-      "title": "PAROL6 · 六轴机械臂抓取系统",
-      "description": "围绕六轴机械臂走通 SocketCAN → ROS 2 / MoveIt 2 → D405 RGB-D → 抓取 → 安全执行的真机链路，VLM 只负责语义选目标。",
+      "kicker": "ROS 2 · MoveIt 2 · MuJoCo",
+      "title": "PAROL6 · 六轴机械臂 ROS2 整机系统",
+      "description": "基于 6 个闭环步进驱动、SocketCAN、STS3215 夹爪和 D405，打通 ROS2/MoveIt2 规划、连续碰撞审计、RGB-D/VLM 抓取与安全执行，并用 MuJoCo 做动力学仿真与控制链验证。",
       "tags": [
-        "ROS 2 / MoveIt 2",
-        "RGB-D / VLM",
-        "SocketCAN"
+        "ROS2 / MoveIt2",
+        "D405 / TF2",
+        "MuJoCo / SocketCAN"
       ],
       "video": "media/parol6/parol6.gif",
       "poster": "media/parol6/poster.jpg"
@@ -44,13 +44,13 @@
     {
       "number": "03",
       "id": "evo-rl",
-      "kicker": "双臂学习 · HIL · Evo-RL",
-      "title": "Evo-RL · SO101 双臂毛巾折叠",
-      "description": "用 SO101 双臂完成毛巾折叠：从分阶段示教和 Pi0.5 基线，到 HIL 定向纠错、Value / Advantage / ACP 再训练与真机复测。",
+      "kicker": "Pi0.5 · HIL / DAgger · 真机复测",
+      "title": "SO101 · 双臂毛巾折叠与 HIL 学习闭环",
+      "description": "基于 Pi0.5、三路相机和 12D 双臂控制完成毛巾折叠，建立 6/10 纯策略真机基线，通过 HIL/DAgger 采集失败状态，并结合 Value / Advantage / ACP 再训练，固定条件复测提升至 7/10。",
       "tags": [
         "Pi0.5 / LeRobot",
-        "HIL / Evo-RL",
-        "双臂操作"
+        "HIL / DAgger",
+        "Value / Advantage"
       ],
       "video": "media/evo-rl/evo-rl.gif",
       "poster": "media/evo-rl/poster.jpg"
@@ -58,13 +58,13 @@
     {
       "number": "04",
       "id": "acot-vla",
-      "kicker": "VLA · 仿真训练 · Quest 3 示教",
+      "kicker": "ACoT · Flow Matching · Quest 3",
       "title": "ACoT-VLA · 多任务仿真训练",
-      "description": "在 AgiBotWorld R2A / GenieSim 中训练和评测多任务 VLA，并用 Quest 3 把人类示教转成结构化训练数据。",
+      "description": "在 GenieSim 完成 15 个任务的数据与控制接口适配，将 21D 控制语义映射到 32D 模型接口，使用 ACoT / Flow Matching 训练并接入 Policy Server 评测；Quest 3 示教链已采集 42 条结构化仿真数据。",
       "tags": [
         "ACoT / OpenPI",
-        "Quest 3 / LeRobot",
-        "多任务仿真"
+        "Flow Matching",
+        "Quest 3 / LeRobot"
       ],
       "video": "media/acot-vla/acot-vla.gif",
       "poster": "media/acot-vla/poster.jpg"
@@ -72,13 +72,13 @@
     {
       "number": "05",
       "id": "g2-real",
-      "kicker": "VLA · G2 真机 · 官方评测",
+      "kicker": "Pi0.5 · 三视角 YOLO · G2 真机",
       "title": "RoboChallenge · G2 真机抓取",
-      "description": "围绕超市货架抓取，用 435 条高质量双手数据微调 Pi0.5，并在主策略外加独立视觉确认与安全 Gate。",
+      "description": "面向密集货架取物，将约 2,800 条数据整理为 435 条高质量双手主集，结合 Pi0.5、三视角视觉 Sidecar 与 YOLO 目标框做一致视觉提示，官方单目标评测 79 分。",
       "tags": [
         "Pi0.5 / G2",
-        "Vision Sidecar",
-        "官方评测"
+        "三视角 YOLO",
+        "官方 79 分"
       ],
       "video": "media/robochallenge-g2/g2-real.gif",
       "poster": "media/robochallenge-g2/training-cameraview.png"
