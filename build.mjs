@@ -94,7 +94,7 @@ const heroButtons = [
   { label: 'Resume', href: hero.resumeHref, primary: false },
 ].filter(b => b.href)
 
-const cardMedia = p => p.video.endsWith('.gif')
+const cardMedia = p => /\.(gif|png|jpe?g|webp)$/i.test(p.video)
   ? `<img class="card-gif" src="${p.video}" alt="${p.title}">`
   : `<video muted playsinline preload="metadata" poster="${p.poster}" src="${p.video}"></video>
      <button class="card-play" type="button" aria-label="播放视频"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72L19 12z"/></svg></button>`

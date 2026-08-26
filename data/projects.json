@@ -11,7 +11,7 @@
     "resumeHref": ""
   },
   "projectHeading": "项目",
-  "projectIntro": "五个项目沿着“工业多轴控制 → ROS2 机械臂整机 → 双臂学习 → VLA 仿真与真机评测”展开。每个项目按“项目背景 → 关键工作 → 系统设计 → 项目结果”展开，可进一步查看技术细节与素材。",
+  "projectIntro": "六个项目沿着“工业多轴控制 → ROS2 机械臂整机 → 双臂学习 → VLA 仿真与真机评测”展开。每个项目按“项目背景 → 关键工作 → 系统设计 → 项目结果”展开，可进一步查看技术细节与素材。",
   "projects": [
     {
       "number": "01",
@@ -82,6 +82,20 @@
       ],
       "video": "media/robochallenge-g2/g2-real.gif",
       "poster": "media/robochallenge-g2/training-cameraview.png"
+    },
+    {
+      "number": "06",
+      "id": "leju-icra",
+      "kicker": "Kuavo 4 Pro · 模仿学习 · ICRA 2026 官方赛",
+      "title": "REAL-I · 人形机器人双臂操作挑战赛",
+      "description": "在 ICRA 2026 官方旗舰赛 Kuavo 4 Pro 人形机器人上，用 LeRobot 双策略（ACT / Diffusion Policy）+ RGB-D 深度融合完成数据、训练、评测到 Docker 交付闭环；81 次提交全记录，总榜第 2（23.1 分）。",
+      "tags": [
+        "ACT / Diffusion",
+        "RGB-D 融合",
+        "总榜第 2"
+      ],
+      "video": "media/leju-icra/微信图片_20260826172745_118_92.png",
+      "poster": ""
     }
   ]
 }
