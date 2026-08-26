@@ -1,8 +1,8 @@
 {
   "hero": {
     "name": "王泽瑜",
-    "role": "机器人 · 控制 · 具身智能",
-    "about": "机器人系统与控制方向工程师，4 年+工业控制与实时系统研发经验。项目覆盖工业多轴与在线测厚、ROS2/MoveIt2 六轴机械臂整机，以及双臂 VLA 真机与仿真。",
+    "role": "机器人 · 控制 · 具身智能 — 系统与真机闭环",
+    "about": "机器人系统与控制方向工程师，4 年+工业控制与实时系统经验。聚焦多轴运动学与在线估计、ROS2/MoveIt2 整机链路、以及 VLA 真机/仿真的数据与评测闭环；工程链路可复现、可排错、可度量。",
     "profileImage": "media/profile/wang-zeyu.jpg",
     "githubHref": "https://github.com/l2ktech",
     "githubLabel": "GitHub",
@@ -10,19 +10,19 @@
     "linkedinHref": "",
     "resumeHref": ""
   },
-  "projectHeading": "项目",
-  "projectIntro": "五个项目沿着“工业多轴控制 → ROS2 机械臂整机 → 双臂学习 → VLA 仿真与真机评测”展开。每个项目按“项目背景 → 关键工作 → 系统设计 → 项目结果”展开，可进一步查看技术细节与素材。",
+  "projectHeading": "项目 — 硬指标优先",
+  "projectIntro": "五条线按“工业多轴在线闭环 → ROS2 整机 → 双臂学习 → VLA 仿真与真机评测”递进。卡片只给硬指标与边界，详情页统一为：定位 → 架构 → 3 个关键技术决策 → 量化结果表 → 边界与可迁移能力 → 深度文档链接。",
   "projects": [
     {
       "number": "01",
       "id": "top",
       "kicker": "双五轴控制 · 在线测厚 · C++ / Qt",
       "title": "TOP · 双五轴镜像测厚闭环系统",
-      "description": "面向薄壁件加工与在线检测，覆盖双五轴协同、超声测厚、电涡流法向、线激光点云、坐标与运动学、Kalman 状态估计、增量 PID 与 C++/Qt 工业软件联调。",
+      "description": "双五轴镜像在线测厚闭环（工业真机）：五类传感融合的受约束补偿链路，C++/Qt 上位机与 64B 协议联调。对外口径 ±0.05mm 补偿 / ±0.01mm 测厚（软件链）。",
       "tags": [
-        "多轴运动学",
-        "Kalman / PID",
-        "C++ / Qt"
+        "±0.05mm 补偿链",
+        "超声·电涡流·W轴",
+        "C++/Qt·64B协议"
       ],
       "video": "media/top/top-sequence.gif",
       "poster": "media/top/13_dual_head_axis_layout.png"
@@ -32,11 +32,11 @@
       "id": "parol6",
       "kicker": "ROS 2 · MoveIt 2 · MuJoCo",
       "title": "PAROL6 · 六轴机械臂 ROS2 整机系统",
-      "description": "基于 6 个闭环步进驱动、SocketCAN、STS3215 夹爪和 D405，打通 ROS2/MoveIt2 规划、连续碰撞审计、RGB-D/VLM 抓取与安全执行，并用 MuJoCo 做动力学仿真与控制链验证。",
+      "description": "PAROL6 六轴真机整机：6×闭环步进 + SocketCAN 唯一执行入口，打通 TF2/MoveIt2 规划—碰撞审计—安全门执行；D405 RGB-D + 抓取过滤，真机闭环抓放已跑通。",
       "tags": [
-        "ROS2 / MoveIt2",
-        "D405 / TF2",
-        "MuJoCo / SocketCAN"
+        "6轴·SocketCAN唯一入口",
+        "MoveIt2·碰撞审计",
+        "20mm方块闭环抓放"
       ],
       "video": "media/parol6/parol6.gif",
       "poster": "media/parol6/poster.jpg"
@@ -46,11 +46,11 @@
       "id": "evo-rl",
       "kicker": "Pi0.5 · HIL / DAgger · 真机复测",
       "title": "SO101 · 双臂毛巾折叠与 HIL 学习闭环",
-      "description": "基于 Pi0.5、三路相机和 12D 双臂控制完成毛巾折叠，建立 6/10 纯策略真机基线，通过 HIL/DAgger 采集失败状态，并结合 Value / Advantage / ACP 再训练，固定条件复测提升至 7/10。",
+      "description": "SO101 双臂毛巾折叠真机学习闭环：三路相机 + Pi0.5 12D 控制，固定协议 6/10 基线 → HIL/DAgger 定向纠错 + Value/Advantage/ACP 再训练 → 固定条件复测 7/10。",
       "tags": [
-        "Pi0.5 / LeRobot",
-        "HIL / DAgger",
-        "Value / Advantage"
+        "6/10 → 7/10 固定复测",
+        "HIL/DAgger",
+        "Value·Advantage·ACP"
       ],
       "video": "media/evo-rl/evo-rl.gif",
       "poster": "media/evo-rl/poster.jpg"
@@ -60,11 +60,11 @@
       "id": "acot-vla",
       "kicker": "ACoT · Flow Matching · Quest 3",
       "title": "ACoT-VLA · 多任务仿真训练",
-      "description": "在 GenieSim 完成 15 个任务的数据与控制接口适配，将 21D 控制语义映射到 32D 模型接口，使用 ACoT / Flow Matching 训练并接入 Policy Server 评测；Quest 3 示教链已采集 42 条结构化仿真数据。",
+      "description": "ACoT-VLA 多任务仿真：15 任务数据合同对齐（21D→32D），GenieSim + Policy Server 评测；最佳已评 4K=0.389（越训非越好）。Quest 3 示教链 42 eps 结构化落盘。",
       "tags": [
-        "ACoT / OpenPI",
-        "Flow Matching",
-        "Quest 3 / LeRobot"
+        "15任务·21D→32D",
+        "4K=0.389 最佳已评",
+        "Quest3 42eps"
       ],
       "video": "media/acot-vla/acot-vla.gif",
       "poster": "media/acot-vla/poster.jpg"
@@ -74,11 +74,11 @@
       "id": "g2-real",
       "kicker": "Pi0.5 · 三视角 YOLO · G2 真机",
       "title": "RoboChallenge · G2 真机抓取",
-      "description": "面向密集货架取物，将约 2,800 条数据整理为 435 条高质量双手主集，结合 Pi0.5、三视角视觉 Sidecar 与 YOLO 目标框做一致视觉提示，官方单目标评测 79 分。",
+      "description": "RoboChallenge G2 真机抓取：2800 候选 → 435 双手主集治理，Pi0.5 + 三视角 YOLO Sidecar 做一致 box-conditioned prompting，单目标官方 79分 / SR 0.6。",
       "tags": [
-        "Pi0.5 / G2",
-        "三视角 YOLO",
-        "官方 79 分"
+        "2800→435 治理",
+        "三视角YOLO·box提示",
+        "官方79分 SR0.6"
       ],
       "video": "media/robochallenge-g2/g2-real.gif",
       "poster": "media/robochallenge-g2/training-cameraview.png"
