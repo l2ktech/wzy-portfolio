@@ -1,61 +1,77 @@
-# RoboChallenge · G2 真机抓取
+这是 RoboChallenge **G2 真机抓取**项目，围绕密集货架取物任务，用真实数据微调 Pi0.5，并结合三视角视觉 Sidecar、YOLO 目标框和安全 Gate，处理“目标看得见，但策略可能抓错实例或执行不安全”的问题。
 
-> **一句话定位**：密集货架取物中“看得见≠抓得对”，以真机数据治理为前提，用三视角 YOLO Sidecar 做一致 `box-conditioned prompting` 突出目标实例，经 Pi0.5 推理与 Verifier/Gate/Recovery 安全执行，并以官方 `rollout` 复盘定位失败。
+项目覆盖**真机数据治理、Pi0.5 微调、三视角视觉增强、box-conditioned prompting、动作 Gate / Recovery 以及官方评测复盘**。Pi0.5、LeRobot、YOLO 为上游框架或模型，系统重点是把数据、视觉提示、策略推理、安全约束和真机评测接成一条能运行、能排错、能复盘的链路。
 
-**硬指标**：**2800 候选 → 1362 可追溯 RAW → 435 双手主集**治理；单目标官方 **79 分 / SR 0.6 / 11 rollouts**；双目标研究线 **35.5 分 / SR 0.1 / 13 rollouts**（瓶颈在相似实例选择与双手状态管理）。
+![G2 真机抓取成功](media/robochallenge-g2/grasp-success.mp4)
 
-![抓取成功](media/robochallenge-g2/grasp-success.mp4)
+## 项目目标
 
-## 架构 · 证据闭环
+真机失败表明“目标在画面里”不等于策略一定抓对那个实例。因此重点解决：
 
-![系统总览](media/robochallenge-g2/system-overview.png)
+- 如何把原始采集数据清洗成能训练的高质量主集；
+- 如何用三视角目标框在训练和推理阶段给 VLA 一致的视觉提示；
+- 如何让模型动作在真正执行前经过安全 Gate；
+- 如何根据官方 rollout、Trace 和视频复盘真实失败，而不是只展示成功片段。
+
+## 主要工作
+
+- 清洗 RoboChallenge 真机数据，处理 Prompt 与真实动作不一致、静止尾段、错误持物和多相机时间错位等问题；
+- 将约 **2,800 条候选数据整理为 435 条高质量双手主集**，用于 Pi0.5 真机任务微调；
+- 使用 PyTorch 三视角视觉 Sidecar 处理 **3×224 图像 + 26D 状态**，结合 YOLO 目标框突出目标实例；
+- 在训练/推理图像上叠加一致目标框作为 **box-conditioned prompting**，让策略优先关注框内目标；
+- 用 Verifier / Gate / Recovery 对在线执行增加安全约束；
+- 根据官方 rollout、Trace 和视频复盘真实失败，区分检测、目标选择、动作生成与执行阶段问题。
+
+## 系统怎么工作
+
+**真机数据 → 数据治理 → 三视角 YOLO / 视觉提示 → Pi0.5 训练与推理 → Verifier / Gate → 机器人执行 → rollout / 官方评测 → 失败复盘 → 回到数据和训练**
 
 ```mermaid
 flowchart LR
-    A["真机数据<br/>~2800 候选"] --> B["数据治理<br/>1362 RAW→435 主集"]
-    B --> C["三视角 Sidecar<br/>3×224+YOLO 框"]
+    A["真机数据<br/>约 2800 条候选"] --> B["数据治理<br/>1362 可追溯 → 435 双手主集"]
+    B --> C["三视角视觉 Sidecar<br/>3×224 图像 + YOLO 目标框"]
     C --> D["一致目标框提示<br/>box-conditioned prompting"]
-    D --> E["Pi0.5 微调/推理"]
-    E --> F{"Verifier/Gate"}
-    F -->|拦截| G["Recovery<br/>松开·后退·重观测"]
+    D --> E["Pi0.5 微调 / 真机推理"]
+    E --> F{"Verifier / Gate"}
+    F -->|"拦截"| G["Recovery<br/>松开 · 后退 · 重观测"]
     G --> C
-    F -->|放行| H["执行"]
-    H --> I["rollout/官方评测"]
+    F -->|"放行"| H["机器人执行"]
+    H --> I["rollout / 官方评测"]
     I --> J["失败复盘"]
     J --> A
 ```
 
-## 3 个关键技术决策
+![G2 在线主链与证据闭环架构](media/robochallenge-g2/system-overview.png)
 
-### 1) 先治理，再训练 — BC 会学错
+## 关键工程工作
 
-- **问题**：`Prompt` 与真实抓取目标不一致、错误持物、静止尾段、多相机时序错位会直接被行为克隆学走。
-- **选择**：以 435 主集为训练主集；治理本身视为策略工程的一部分。
-- **证据**：[训练相机视角](media/robochallenge-g2/training-cameraview.png)
+### 1. 真机数据先治理，再继续训练
 
-### 2) 三视角一致提示 — 让 VLA 看对实例
+RoboChallenge 真机数据从约 **2800 条候选 → 1362 条可追溯 RAW 数据 → 435 条高质量双手主集**。清洗重点包括 Prompt 与实际抓取目标不一致、抓取后错误状态、长时间静止尾段和多相机时间错位等问题。
 
-- **问题**：密集相似商品中注意力分散，单视角框在训练/推理不一致会引入 `train-infer gap`。
-- **选择**：独立 Sidecar 跑 YOLO/`classifier`，三视角一致框叠加到输入图像；框为视觉条件，动作仍由 Pi0.5 产生。
-- **定位**：`box-conditioned prompting`，非 YOLO 直控。
+![G2 货架训练相机视角](media/robochallenge-g2/training-cameraview.png)
 
-### 3) 在线安全门 — 看对≠可执行
+行为克隆会认真学习监督数据中的错误，因此**数据治理本身是策略工程的一部分**。
 
-- **问题**：视觉对了仍可能动作不安全。
-- **选择**：`Verifier / Gate / Recovery`：条件不满足则松开/后退/重观测，不盲目执行。
-- **证据**：[饮料抓取比赛](media/robochallenge-g2/g2-beverage-competition.png)
+### 2. 三视角视觉增强不是替代 VLA，而是给它更明确的目标
 
-## 量化结果
+视觉 Sidecar 独立运行 YOLO / classifier，从三个相机视角找到目标实例，并把一致目标框叠加到送入策略的图像中。这样做的目的不是让 YOLO 直接控制机器人，而是让 VLA 在密集、相似商品环境里更容易把注意力放到正确目标上。
 
-| 赛道 | 分数 | SR | Rollouts | 备注 |
-|---|---|---|---|---|
-| 单目标官方 | **79** | **0.6** | 11 | 主赛道口径 |
-| 双目标研究线 | 35.5 | 0.1 | 13 | 1 次完整成功，相似实例/双手管理为瓶颈 |
+这种训练和推理阶段都保持一致的目标框提示，可以理解为 **box-conditioned prompting**：框是视觉条件，动作仍由 Pi0.5 产生。
 
-## 边界与可迁移
+### 3. 在线执行再加安全 Gate
 
-- Pi0.5/LeRobot/YOLO 为上游能力，本项目在数据—提示—推理—安全—评测闭环。
-- 双目标与强相似实例仍需迭代；失败按检测/选择/生成/执行分层复盘。
-- 可迁移：真机数据治理范式、`box-conditioned prompting` 一致性设计、在线 `Gate/Recovery` 安全模式、基于 `rollout/Trace/视频` 的分层复盘。
+视觉提示解决“看谁”的问题，但不能保证每个动作都安全。因此在线链路仍保留 Verifier、Gate 和 Recovery：条件不满足时不继续盲目执行，而是松开、后退或重新观测。
 
-> 深度文档：`content_out/P04-R2A/19-G2饮料抓取评测项目复现概览.md` 与 `content_out/P04-R2A/01-ICRA比赛项目报告入口.md`
+## 项目结果
+
+- RoboChallenge 单目标官方评测：**79 分 / Success Rate 0.6 / 11 rollouts**；
+- 双目标研究线：**35.5 分 / SR 0.1 / 13 rollouts / 1 次完整成功**，瓶颈在相似实例选择与双手状态管理，仍在持续迭代。
+
+![饮料抓取比赛](media/robochallenge-g2/g2-beverage-competition.png)
+
+![饮料抓取项目](media/robochallenge-g2/g2-beverage-project.png)
+
+## 技术栈
+
+**Pi0.5 · LeRobot · OpenPI · G2 · YOLO · 三视角 Vision Sidecar · Box-conditioned Prompting · Verifier / Gate / Recovery · JAX / PyTorch**
