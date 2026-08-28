@@ -75,3 +75,7 @@ RoboChallenge 真机数据从约 **2800 条候选 → 1362 条可追溯 RAW 数�
 ## 技术栈
 
 **Pi0.5 · LeRobot · OpenPI · G2 · YOLO · 三视角 Vision Sidecar · Box-conditioned Prompting · Verifier / Gate / Recovery · JAX / PyTorch**
+
+![优化左右手且不挡商品](media/robochallenge-g2/优化左右手且不挡商品.png)
+
+![模式识别状态加入](media/robochallenge-g2/模式识别状态加入.png)
