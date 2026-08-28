@@ -58,12 +58,8 @@ flowchart LR
 - 双目标与强相似实例仍需迭代；失败按检测/选择/生成/执行分层复盘。
 - 可迁移：真机数据治理范式、`box-conditioned prompting` 一致性设计、在线 `Gate/Recovery` 安全模式、基于 `rollout/Trace/视频` 的分层复盘。
 
-## 真机迭代细节
-
 ![优化左右手且不挡商品](media/robochallenge-g2/优化左右手且不挡商品.png)
-- 调整双手运动与站位，优化左右手布局，抓取过程中手臂不再遮挡目标商品，让相机始终"看得见"。
 
 ![模式识别状态加入](media/robochallenge-g2/模式识别状态加入.png)
-- 在系统状态中引入模式识别，任务阶段可被显式识别与展示，配合 Verifier/Gate 判断当前该做什么。
 
 > 深度文档：`content_out/P04-R2A/19-G2饮料抓取评测项目复现概览.md` 与 `content_out/P04-R2A/01-ICRA比赛项目报告入口.md`
