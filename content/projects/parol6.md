@@ -58,9 +58,9 @@ flowchart LR
 
 机器人系统很容易出现"RViz 看起来对、真机却偏"的问题。项目把关节方向、零位、减速比和多圈恢复放在统一坐标源中处理，避免网页、ROS、抓取脚本和底层驱动各自补一套 offset。
 
-### 2. 规划结果还要经过真机安全链
+### 2. 规划器与真机安全链
 
-MoveIt 2 规划成功不等于可以直接执行。系统继续检查 robot state、PlanningScene、关节限位、整条轨迹碰撞以及执行终态；出现 stall 或环境变化时，从 fresh 状态重新规划，而不是重复播放旧轨迹。
+规划器使用 **OMPL RRTConnect** 与 **Pilz PTP/LIN**。MoveIt 2 规划成功不等于可以直接执行，系统继续检查 robot state、PlanningScene、关节限位、整条轨迹碰撞以及执行终态；出现 stall 或环境变化时，从 fresh 状态重新规划，而不是重复播放旧轨迹。
 
 ### 3. 从 RGB-D 候选到真正抓取
 

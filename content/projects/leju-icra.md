@@ -15,6 +15,8 @@
 
 - 官方数据集 rosbag → LeRobot parquet 转换，6 路相机 RGB-D 与关节/控制信号时间对齐；
 - 基于 LeRobot 0.4.2 二次开发训练框架：**ACT**（chunk 30）与 **Diffusion Policy**（horizon 16 / step 8）双策略并行；
+- 训练加速：**Accelerate DDP + AMP** 多卡训练；
+- 部署链含 **WBC 策略部署**，把训练策略接到真机全身控制执行链；
 - 核心算法改动 **RGB-D 深度融合**：Diffusion 侧共享 ResNet18 深度编码器；ACT 侧 RGB↔Depth 双向交叉注意力；
 - 部署链：`KuavoBaseRosEnv`（10Hz 关节+夹爪下发）+ 多模态帧对齐 + Docker 镜像交付（基座 `final:v3.2`，`docker load → run --gpus all`）；
 - 以官方 10-episode 自动评测为唯一选模型依据：现场当天 epoch100/200、epoch50/100 多轮评测后择优选交；
