@@ -22,7 +22,7 @@
 
 - 集成六轴驱动器、CANable2 与 **SocketCAN**，建立唯一底层执行入口；
 - 统一关节方向、零位、减速比和多圈位置，保证底层与 ROS 坐标一致；
-- 搭建 **ROS 2 / TF2 / MoveIt 2 / FollowJointTrajectory** 执行链；
+- 搭建 **ROS 2 / TF2 / MoveIt 2 / FollowJointTrajectory** 执行链（六轴数值 IK 用 KDL `ChainIkSolverPos_LMA`，多解选最接近当前姿态且不超限不撞的解）；
 - 使用 D405 完成 RGB-D 感知、目标三维位置计算与 eye-in-hand 调试；
 - 接入 GR-ConvNet 抓取候选，并增加桌面、夹爪几何和可达性过滤；
 - 把 VLM 限制在语义目标选择层，真正运动仍由 RGB-D、TF2、规划器和安全逻辑决定；
