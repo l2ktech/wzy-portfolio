@@ -18,10 +18,11 @@
       "id": "top",
       "kicker": "双五轴控制 · 在线测厚 · C++ / Qt",
       "title": "TOP · 双五轴镜像测厚闭环系统",
-      "description": "双五轴镜像在线测厚闭环（工业真机）：五类传感融合的受约束补偿链路，C++/Qt 上位机与 64B 协议联调。对外口径 ±0.05mm 补偿 / ±0.01mm 测厚（软件链）。",
+      "description": "双五轴镜像在线测厚闭环（工业真机）：五类传感融合 + MPC 变形预测，EtherCAT 从站采集四路电涡流，末端压力用于阻抗/力位混合控制；C++/Qt 上位机与 64B 协议联调。±0.05mm 补偿 / ±0.01mm 测厚。",
       "tags": [
         "±0.05mm 补偿链",
-        "超声·电涡流·W轴",
+        "MPC·EtherCAT",
+        "阻抗/力位混合",
         "C++/Qt·64B协议"
       ],
       "video": "media/top/top-sequence.gif",
@@ -60,10 +61,10 @@
       "id": "acot-vla",
       "kicker": "ACoT · Flow Matching · Quest 3",
       "title": "ACoT-VLA · 多任务仿真训练",
-      "description": "ACoT-VLA 多任务仿真：15 任务数据合同对齐（21D→32D），GenieSim + Policy Server 评测；最佳已评 4K=0.389（越训非越好）。Quest 3 示教链 42 eps 结构化落盘。",
+      "description": "ACoT-VLA 多任务仿真：15 任务数据合同对齐（21D→32D），GenieSim + Policy Server 评测；官方 4K=0.389，Quest 3 示教链 42 eps 结构化落盘。",
       "tags": [
         "15任务·21D→32D",
-        "4K=0.389 最佳已评",
+        "官方 4K=0.389",
         "Quest3 42eps"
       ],
       "video": "media/acot-vla/acot-vla.gif",
@@ -74,11 +75,11 @@
       "id": "g2-real",
       "kicker": "Pi0.5 · 三视角 YOLO · G2 真机",
       "title": "RoboChallenge · G2 真机抓取",
-      "description": "RoboChallenge G2 真机抓取：2800 候选 → 435 双手主集治理，Pi0.5 + 三视角 YOLO Sidecar 做一致 box-conditioned prompting，单目标官方 79分 / SR 0.6。",
+      "description": "RoboChallenge G2 真机抓取：2800 候选 → 435 双手主集治理，Pi0.5 + 三视角 YOLO Sidecar 做一致 box-conditioned prompting，单目标官方 79 分 / SR 0.6，总排名第六；训练 8×H200、batch 192、5000 steps。",
       "tags": [
         "2800→435 治理",
         "三视角YOLO·box提示",
-        "官方79分 SR0.6"
+        "79分·SR0.6·第6"
       ],
       "video": "media/robochallenge-g2/g2-real.gif",
       "poster": "media/robochallenge-g2/training-cameraview.png"
@@ -91,7 +92,7 @@
       "description": "REAL-I 2026（ICRA 官方旗舰赛）：Kuavo 4 Pro 全尺寸人形双臂，官方数据集 → ACT/Diffusion 双策略 + RGB-D 深度融合 → Docker 交付官方评测。队伍「断雁无凭」总榜第 2（23.1 分），仿真任务榜第 3（92.98）。",
       "tags": [
         "总榜第2 · 23.1分",
-        "81次提交全记录",
+        "81次提交",
         "ACT/Diffusion+RGB-D"
       ],
       "video": "media/leju-icra/微信图片_20260826172745_118_92.png",

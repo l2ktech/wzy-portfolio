@@ -65,7 +65,8 @@ RoboChallenge 真机数据从约 **2800 条候选 → 1362 条可追溯 RAW 数�
 
 ## 项目结果
 
-- RoboChallenge 单目标官方评测：**79 分 / Success Rate 0.6 / 11 rollouts**；
+- RoboChallenge 单目标官方评测：**79 分 / Success Rate 0.6 / 11 rollouts，总排名第六**；
+- 训练配置：**8×H200、batch 192、5000 steps**；
 - 双目标研究线：**35.5 分 / SR 0.1 / 13 rollouts / 1 次完整成功**，瓶颈在相似实例选择与双手状态管理，仍在持续迭代。
 
 ![饮料抓取比赛](media/robochallenge-g2/g2-beverage-competition.png)

@@ -67,7 +67,7 @@ Quest 3 线最终确认留存 **42 episodes / 42 H5 / 126 MP4 / 约 13 GB**。�
 
 ## 项目结果
 
-- AgiBotWorld R2A 15 任务 `all_15 round1` 最佳已评 checkpoint：**4K = 0.389**（无公开榜单截图，不报排名）；
+- AgiBotWorld R2A 15 任务 `all_15 round1` 官方评测 checkpoint：**4K = 0.389**；
 - Quest 3 示教链：**42 episodes / 126 路视频文件**完成验收留存。
 
 ## 技术栈
