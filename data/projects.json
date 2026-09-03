@@ -10,8 +10,8 @@
     "linkedinHref": "",
     "resumeHref": ""
   },
-  "projectHeading": "项目 — 硬指标优先",
-  "projectIntro": "六条线按“工业多轴在线闭环 → ROS2 整机 → 双臂学习 → VLA 仿真与真机评测 → 人形机器人官方赛”递进。卡片只给硬指标与边界，详情页统一为：定位 → 架构 → 3 个关键技术决策 → 量化结果表 → 边界与可迁移能力 → 深度文档链接。",
+  "projectHeading": "项目",
+  "projectIntro": "详情页为：定位 → 架构 → 3 个关键技术决策 → 量化结果表 → 边界与可迁移能力 → 深度文档链接。",
   "projects": [
     {
       "number": "01",
