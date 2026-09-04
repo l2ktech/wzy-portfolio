@@ -54,7 +54,7 @@ npx serve dist        # 或任意静态服务器打开 dist/index.html
 ![D0 成功回合](media/evo-rl/d0-ep00-success-xiaomi-contact.png)
 
 ### 04 · ACoT-VLA 多任务仿真训练
-<video controls muted playsinline preload="metadata" poster="media/acot-vla/three-view-demo-poster.jpg" src="media/acot-vla/vr-clean-desktop-3view-demo.mp4"></video>
+<video controls muted playsinline preload="metadata" poster="media/acot-vla/three-view-demo-poster.jpg" src="media/acot-vla/vr-sort-packages-3view-demo.mp4"></video>
 
 ![ACoT-VLA 系统总架构](media/acot-vla/system-architecture.png)
 

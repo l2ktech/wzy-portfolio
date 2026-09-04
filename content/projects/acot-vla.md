@@ -16,7 +16,13 @@
 
 ![三视角演示画面](media/acot-vla/three-view-demo-poster.jpg)
 
-![Quest 3 三视角示教成片](media/acot-vla/vr-clean-desktop-3view-demo.mp4)
+**Quest 3 三视角示教实录 · Sort packages**（640×400 头部 + 2×1280×1056 双手，30 fps）
+
+![Quest 3 三视角示教实录 · Sort packages](media/acot-vla/vr-sort-packages-3view-demo.mp4)
+
+**Quest 3 三视角示教实录 · Clean the desktop**
+
+![Quest 3 三视角示教实录 · Clean the desktop](media/acot-vla/vr-clean-desktop-3view-demo.mp4)
 
 ## 主要工作
 
